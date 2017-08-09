@@ -1,0 +1,50 @@
+spring:
+  application:
+    name: bicap-ms-service-travel-path-v1
+  datasource:
+    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:mysql://10.10.1.65:3306/bicap?characterEncoding=utf8&useSSL=false
+    username: zzyq
+    password: 1qaz2WSX!@
+    type: com.alibaba.druid.pool.DruidDataSource
+    initialSize: 10
+    minIdle: 5
+    maxActive: 30
+    maxWait: 60000
+    timeBetweenEvictionRunsMillis: 60000
+    minEvictableIdleTimeMillis: 30000
+    validationQuery: SELECT 1 FROM DUAL
+    testWhileIdle: true
+    testOnBorrow: false
+    testOnReturn: false
+    poolPreparedStatements: true
+    maxPoolPreparedStatementPerConnectionSize: 20
+    filters: stat,wall,log4j
+    connectionProperties: druid.stat.mergeSql=true;druid.stat.slowSqlMillis=5000
+  redis:
+    database: 6
+    host: 10.10.1.85
+    port: 6379
+    pool:
+      max-active: 8
+      max-wait: -1
+      max-idle: 8
+      min-idle: 0
+    timeout: 0
+server:
+  port: 13900
+mybatis:
+  mapper-locations: classpath:mapper/*.xml
+  type-aliases-package: com.bicap.cloud.travelPath.entity
+eureka:
+  client:
+    serviceUrl:
+      defaultZone: http://bicap:bicap@10.10.1.175:10076/eureka
+  instance:
+     hostname: bicap-ms-service-travel-path-v1
+     instance-id: ${spring.application.name}:${spring.cloud.client.ipAddress}:${server.port}
+     prefer-ip-address: true
+
+logging:
+     file: bicap-ms-service-travel-path-v1.log
+     level:com.bicap.cloud.activeanalysis: info
