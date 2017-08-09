@@ -3,7 +3,7 @@ spring:
     name: bicap-ms-service-travel-path-v1
   datasource:
     driver-class-name: com.mysql.jdbc.Driver
-    url: jdbc:mysql://10.10.1.65:3306/bicap?characterEncoding=utf8&useSSL=false
+    url: jdbc:mysql://10.10.1.12:3306/bicap?characterEncoding=utf8&useSSL=false
     username: zzyq
     password: 1qaz2WSX!@
     type: com.alibaba.druid.pool.DruidDataSource
