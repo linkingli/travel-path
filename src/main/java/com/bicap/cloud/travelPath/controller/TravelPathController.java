@@ -28,21 +28,9 @@ public class TravelPathController {
         String begin = request.getParameter("begin");
         String end = request.getParameter("end");
         String score = request.getParameter("score");
-//        String taskId = "9";
-//        String begin = "2016-06-14";
-//        String end = "2017-07-18";
-//        String score = null;
         return travelPathService.getTravelPath(taskId,begin,end,score);
     }
 
-//    @RequestMapping("/list")
-//    public List getTop8ActiveIntUser(HttpServletRequest request, HttpServletResponse response){
-//        String taskId = "9";
-//        String begin = "2016-06-14";
-//        String end = "2017-07-18";
-//        String score = null;
-//        return travelPathService.getTravelPath(taskId,begin,end,score);
-//}
 }
 
 

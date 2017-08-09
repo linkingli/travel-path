@@ -4,9 +4,8 @@
 
     <select id="getFirstTravelPath" parameterType="java.util.Map" resultMap="firstTravelPath">
         SELECT c.`source_name` sourceName
-        FROM t_authority a ,t_collectdata c ,t_data_subject d,t_task t
-        WHERE  c.id = d.id AND d.subjectId = t.id AND t.id = #{taskId} AND c.`source` IS NOT NULL AND c.`source_name` IS NOT NULL
-        AND c.`publishDate` BETWEEN #{begin} AND #{end}
+        FROM t_collectdata c STRAIGHT_JOIN t_data_subject d STRAIGHT_JOIN t_authority a ON c.id=d.id AND d.subjectId = #{taskId}
+        AND c.`source` IS NOT NULL AND c.`source_name` IS NOT NULL
         <if test="score!=null and score!=''">
             <choose>
                 <when test="score==1">
@@ -20,6 +19,7 @@
                 </when>
             </choose>
         </if>
+        AND c.`publishDate` BETWEEN #{begin} AND #{end}
         ORDER BY c.`publishDate` ASC LIMIT 1
     </select>
 
@@ -30,12 +30,13 @@
     </resultMap>
 
 
+
+
     <select id="getTravelPath" parameterType="java.util.Map" resultType="String">
         SELECT DISTINCT c.`source_name`
-        FROM t_authority a ,t_collectdata c ,t_data_subject d,t_task t
-        WHERE  c.id = d.id AND d.subjectId = t.id AND t.id = #{taskId} AND c.`source`!='' AND c.`source` IS NOT NULL AND c.`source_name`!='' AND c.`source_name` IS NOT NULL
+        FROM t_collectdata c STRAIGHT_JOIN t_data_subject d STRAIGHT_JOIN t_authority a ON c.id=d.id AND d.subjectId = #{taskId}
+        AND c.`source`!='' AND c.`source` IS NOT NULL AND c.`source_name`!='' AND c.`source_name` IS NOT NULL
         AND c.`source`= #{sourceName} AND c.`source`!=c.`source_name`
-        AND c.`publishDate` BETWEEN #{begin} AND #{end}
         <if test="score!=null and score!=''">
             <choose>
                 <when test="score==1">
@@ -49,6 +50,7 @@
                 </when>
             </choose>
         </if>
+        AND c.`publishDate` BETWEEN #{begin} AND #{end}
         GROUP BY c.`source_name`
     </select>
 
