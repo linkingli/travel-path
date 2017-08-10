@@ -31,6 +31,9 @@ public class TravelPathController {
         return travelPathService.getTravelPath(taskId,begin,end,score);
     }
 
+
+
+
 }
 
 

@@ -7,17 +7,7 @@
         FROM t_collectdata c STRAIGHT_JOIN t_data_subject d STRAIGHT_JOIN t_authority a ON c.id=d.id AND d.subjectId = #{taskId}
         AND c.`source` IS NOT NULL AND c.`source_name` IS NOT NULL
         <if test="score!=null and score!=''">
-            <choose>
-                <when test="score==1">
-                    <![CDATA[ and (c.score>0.55)]]>
-                </when>
-                <when test="score==0">
-                    <![CDATA[ and (c.score >= 0.45 and c.score<=0.55)]]>
-                </when>
-                <when test="score==-1">
-                    <![CDATA[ and (c.score<0.45)]]>
-                </when>
-            </choose>
+            AND c.appraise = #{score}
         </if>
         AND c.`publishDate` BETWEEN #{begin} AND #{end}
         ORDER BY c.`publishDate` ASC LIMIT 1
@@ -38,17 +28,7 @@
         AND c.`source`!='' AND c.`source` IS NOT NULL AND c.`source_name`!='' AND c.`source_name` IS NOT NULL
         AND c.`source`= #{sourceName} AND c.`source`!=c.`source_name`
         <if test="score!=null and score!=''">
-            <choose>
-                <when test="score==1">
-                    <![CDATA[ and (c.score>0.55)]]>
-                </when>
-                <when test="score==0">
-                    <![CDATA[ and (c.score >= 0.45 and c.score<=0.55)]]>
-                </when>
-                <when test="score==-1">
-                    <![CDATA[ and (c.score<0.45)]]>
-                </when>
-            </choose>
+            AND c.appraise = #{score}
         </if>
         AND c.`publishDate` BETWEEN #{begin} AND #{end}
         GROUP BY c.`source_name`
