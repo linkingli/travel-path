@@ -16,8 +16,10 @@ import java.util.*;
 @Service
 public class TravelPathServiceImpl implements TravelPathService{
     private final Logger logger = LoggerFactory.getLogger(this.getClass());
+
     @Autowired
-    TravelPathMapper travelPathMapper;
+    private TravelPathMapper travelPathMapper;
+
     public List getTravelPath(String taskId,String begin,String end,String score){
         Map map = new HashMap();
         map.put("taskId",taskId);
@@ -40,8 +42,6 @@ public class TravelPathServiceImpl implements TravelPathService{
         System.out.println(list);
         return list;
     }
-
-
 
     //无chilrend的
     public HashSet m(HashSet all,List list,Map map){

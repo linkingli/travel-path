@@ -5,7 +5,7 @@
     <select id="getFirstTravelPath" parameterType="java.util.Map" resultMap="firstTravelPath">
         SELECT c.`source_name` sourceName
         FROM t_collectdata c STRAIGHT_JOIN t_data_subject d STRAIGHT_JOIN t_authority a ON c.id=d.id AND d.subjectId = #{taskId}
-        AND c.`source` IS NOT NULL AND c.`source_name` IS NOT NULL
+        AND c.`source`!='' AND c.`source_name`!=''
         <if test="score!=null and score!=''">
             AND c.appraise = #{score}
         </if>
@@ -25,7 +25,7 @@
     <select id="getTravelPath" parameterType="java.util.Map" resultType="String">
         SELECT DISTINCT c.`source_name`
         FROM t_collectdata c STRAIGHT_JOIN t_data_subject d STRAIGHT_JOIN t_authority a ON c.id=d.id AND d.subjectId = #{taskId}
-        AND c.`source`!='' AND c.`source` IS NOT NULL AND c.`source_name`!='' AND c.`source_name` IS NOT NULL
+        AND c.`source`!='' AND c.`source_name`!=''
         AND c.`source`= #{sourceName} AND c.`source`!=c.`source_name`
         <if test="score!=null and score!=''">
             AND c.appraise = #{score}
